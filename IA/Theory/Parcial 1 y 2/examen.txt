@@ -1,0 +1,45 @@
+EJERCICIOS MODELO:
+
+1. Ejercicio A*
+	Deducir estados de busqueda (Como resolver el problem)
+	Especificar acciones para generar sucesores
+	Especificar estado inicial
+	Especificar test objetivo
+	Definir heuristica
+		Para demostrar admisivilidad:
+			Primero si es adminisble, llega al resultado optimo
+			Es monotona cuando el costo de padre es menor que el del hijo
+	Generar A*
+		Vas generando ampliando arbol secuencialmente desde nodos con menor valor de heuristica
+
+2. Ejercicio MINIMAX
+	[a, b]
+	En nodo MAX: a = max(a, sucesores de b)
+	En nodo MIN: b = min(b, sucesores de a) 
+	Poda cuando a > b
+
+3. Ejercicio knn
+	Hallamos distancias
+	Cojemos los k primeros, los de menor valor de distancia
+
+4. Ejercicio entropia
+	Para calcular la entropia de la clase hallamos probabilidades y aplicamos H(x) = - P(x) * log(P(x)) - P(y) * log(P(y))
+	Para calcular la ganancia de informacion de las preguntas
+		Coges la clase que vas a analizar. Hallas la entropia con cada uno de los posibles valores
+		Hallas la entropia total aplicando formula
+	Eliges la pregunta con mayor ganancia para el nodo raiz
+
+	Si se usa C4.5 se mira atributo > 
+
+6. Ejercicio estimar error de generalizacion
+	Error de entrenamiento: Capacidad que tiene el modelo de aprender de unos ciertos datos
+	Error de validacion: Datos para probar el modelo, que el modelo no ha visto
+	Error de validacion cruzada: Se reserva un conjunto de test y se van realizando pruebas cambiando validacion y entrenamiento
+	Error de test: Error obtenido al testear con el conjunto de datos de test
+	Error de generalizacion: Se produce cuando un el modelo ha aprendido de memoria	
+	Falta por poner como calcular los errores
+
+7. Ejercicio formalizacion
+	Buena suerte brodel
+
+Estos dos ultimos ejercicios estan en el bloque 3 por si quiero probar suerte
