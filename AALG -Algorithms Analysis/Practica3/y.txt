@@ -1,0 +1,30 @@
+1000 0.000000 21.392773 999 1
+2000 0.000000 36.868555 2000 1
+3000 0.000000 49.382424 2999 1
+4000 0.000000 69.445099 4000 1
+5000 0.000000 84.777279 4999 1
+6000 0.000000 95.360165 6000 1
+7000 0.000000 113.549407 6999 1
+8000 0.000000 146.825464 8000 1
+9000 0.000000 177.376604 9000 1
+10000 0.000000 167.137225 10000 1
+
+fichero:
+nºelems, tiempo_ord, obmedia, obmax, obmin.
+
+/*comandos gnuplot*/
+    Entras en gnuplot poniendo:
+        gnuplot
+    
+    Establecer etiquetas:
+        set xlabel "numero de elementos" (Nombre para la x de la gráfica)
+        set ylabel "numero promedio de obs" (Nombre para y de la gráfica)
+        set tittle "comparación obs busqueda lineal vs busqueda binaria" (Pones título a la gráfica)
+        
+    Establecer el rango:
+        set srange [1000:10000] (Límite del eje x)
+        set yrange [10:430000] (Límite del eje y)
+        
+    Establecer los límites:
+        plot "fichero" using p:o (Las columnas que quieres que sean x e y) with lines (pintar con lineas), plot "fichero"...
+        

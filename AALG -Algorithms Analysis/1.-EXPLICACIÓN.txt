@@ -1,0 +1,143 @@
+CABECERAS NECESARIAS
+	#include <time.h>
+	
+#include <stdio.h>
+
+	#include <string.h>
+
+	#include <stdlib.h>
+
+	#include <limits.h>
+	#include <assert.h>
+
+
+Makefile:
+	Es un ejemplo de como construir un makefile, en este caso el necesario para la practica 3
+
+Ejercicio 4, 5
+	Son mains, de forma que se pueden ejecutar obteniendo resultados
+	No los entiendo bien, y seguramente me pidan hacer uno, aquí puedo ver ejemplos.
+	Argumentos de entrada:
+		-int argc: cuenta las entradas que tiene que tener:
+			-1.- ./ejercicio5 // 2.- -num_min // 3.- 1000 // 4.- -num_max // ...
+			En este caso el total de argumentos de entrada es de 11, por lo que se coloca un if
+				en el que si argc es diferente de 11, imprimiremos lo siguente por pantalla:
+					fprintf(stderr, "Error en los parámetros de entrada");
+					fprintf(stderr, "%s -num_min <int> -num_max <int> -incr <int>\n", argv[0]);
+					fprintf(stderr, "\t\t -n_veces <int> -fichSalida <string> \n");
+						Estos dos últimos fprintf simplemente nos dicen como tenemos que introducir los parametros de entrada
+					El resto de fprintf que viene a continuación nos explican lo que hay que escribir en cada argumento:
+						   fprintf(stderr, "-num_min: numero minimo de elementos de la tabla\n");
+ // ...
+
+		-char ** argv: Es un array de caracteres, de forma que va guardando lo que escribimos por teclado
+				./ejercicio5 -num_min 1000 -num_max 10000 -incr 1000 -n_veces 1 -fichSalida bbin.log
+				argv[0] //argv[1], argv[2] //argv[3], argv[4] // ....
+
+	El programa después comprueba que hayamos escrito todo bien:	
+		Para ello, hace un for desde 1 hasta argc (i<argc) // Lo hace desde el 1 por que el 0 es ./ejercicio5
+		y va comparando que los parametros introducidos son correctos:
+			-- necesario <string.h> if (strcmp(argv[i], "-num_min")==0)
+				Si está bien, copia el número pasado como número mínimo en la variable num_min
+				num_min = atoi(argv[++i]); // lo igualas al argumento 2 que es el valor de num_min
+				Y así con todos, para copiar una cadea;
+					else if (strcmp(argv[i], "-fichSalida") == 0) {
+ 
+					     strcpy(nombre, argv[++i]);
+					}
+				Es necesario comprobar que no falle, y si falla haremos lo siguiente:
+					else {
+
+      						fprintf(stderr, "Parametro %s es incorrecto\n", argv[i]);
+      
+						exit(-1);
+    
+					}
+
+				Finalmente se pasa la función que se quiere realizar con los parametros introducidos por teclado
+				Y se comprueba que el resultado de esta sea distinto de err;
+					Si es ERR imprimiremos que se ha producidoun error en la función.
+					Si NO, imprimiremos Salida correcta.
+						Return 0;
+
+
+busqueda.c y .h
+	Estos ficheros contienen las cabeceras de busqueda.
+	Las funciones implementadas son las:
+		-Generar claves
+		-Diccionario: iniciar, liberar, insertar/masivo, y buscar
+		-Metodos de búsqueda: bbin, blin, blin_auto.
+
+ordenación.c y .h
+	Encontramos los distintos métodos de ordenación implementados
+		1.- BubbleSort
+		2.- MergeSort // 2.1.-, 2.2.-... Y las funciones que estos requieran
+		3.- QuickSort // 3.1.-, 3.2.-...
+		Entre estas funciones "interiores", encontramos las funciones de Copiar(Merge), Partir(QuickSort), Medio (para hallar el valor medio del array de Quicksort) y sus variantes.
+
+permutaciones.c y .h
+	Encontramos las distintas funcines que son necesarias para generar permutaciones
+		1.- alet_num Que genra un número aleatorio entre 2 indices
+		2.- int * genera_perm Que reserva memoria para un int* y lo rellena con números aleatorios gracias a la función anterior
+		3.- int **  genera_perm Que nos reserva memoria para un int** y lo rellena con el número de perm pasado por arg y con número aleatorios con un max también pasado como arg
+		4.- int swap Que nos intercambia 2 punteros ejemplo: x= swap(&tabla[i], &tabla[j])
+
+tiempos.c y .h
+	Encontramos las funciones necesarias para medir los tiempos que tardan en ordenar las distintas funciones bbin, Quicksort...
+	Esto dependerá del puntero a función que se nos pase.
+	A su vez, encontramos una función para ir imprimiendo los valor que vamos obteniendo de la estructurar ptiempo.
+	Estas funciones son mas complicadas de entenders así que si me piden algo en el examen me lo miro y lo proceso, que no es tan jodido.
+	Para la mayoría de estas será necesario usar 2 variables inicializadas a clock() que guarda la fecha exacta, al restarlas
+		y dividirlas por una costante, obtenemos los segundo que ha tardado.
+
+GNUPLOT
+	ANDREWS EXPLANATION:
+		f(x) = a*x/2 + b (a*x + b siempre así)
+		fit f(x) "fichero" u 1:3 w l via a,b (a pasa a tomar el valor de la columna 1 y b la de la 3)
+		plot "fichero" u 1:3 w l, f(x)
+
+	FUNCIONES PARA MERGE Y QUICK ==> a*xlogx +b == NLogN // MB = NlogN/2 // QB = 2NlogN
+	FUNCIONES PARA BLIN ==> caso menor = 1 // caso mayor = N // caso medio = N/2
+	FUNCIONES PARA BBIN ==> TODO NlogN
+	FUNCIONES PARA BUBBLE ==> N^2/2 - N/2
+		BUBBLE FLAG E INSERT ==> N^2/2 - N/2 // N^2/4 // N -1
+
+
+	No me da tiempo a explicarlo, y tengo que practicarlo mas, pongo las bases por si luego no lo hago:
+		para entrar en gnuplo nos posicionamos en la carpeta donde tenemos los archivos que queremos utilizar y escribimo gnuplo
+		para hacer gráficas.- plot
+			desde un fichero.- "fichero"
+			usando estas filas.- using 1:3 == u 1:3 // utilizando las columnas x=1 y=3
+			como lo representamos.- with lines == w l
+			para añadir otra función a la gráfica.- Se pone una coma.- , "fichero" u x:y w l
+
+			grafica cualquiera.- plot "función" == plot sin(x)*x+y
+
+			Establecer etiquetas:
+        set xlabel "numero de elementos" (Nombre para la x de la gráfica)
+ 
+						     set ylabel "numero promedio de obs" (Nombre para y de la gráfica)
+       
+						     set tittle "comparación obs busqueda lineal vs busqueda binaria" (Pones título a la gráfica)
+  
+      
+   
+ 			Establecer el rango:
+        set srange [1000:10000] (Límite del eje x)
+        
+						    set yrange [10:430000] (Límite del eje y)
+       
+ 
+   
+ 			Establecer los límites:
+     plot "fichero" using p:o (Las columnas que quieres que sean x e y) with lines (pintar con lineas), "fichero"...
+        
+
+PUNTEROS
+	si pasas tabla, estas pasando la dirrección de la tabla[0]
+	Si pasas tabla[0] pasas en contenido que hay en tabla[0]
+	*pos pasas el contenido de ese puntero, o lo modifícas
+	&pos, pasas la dirección de memoria de ese puntero
+	HAY QUE SEGUIR TABAJANDO EN ESTO.
+
+
